@@ -1,11 +1,11 @@
 import React from 'react'
-import {Header} from './components/Header/Header'
+import {Row} from './components/Row/Row'
 
 class App extends React.Component{
     render(){
         return(
             <>
-                <Header />
+                <Row title="Netflix Originals" />
             </>
         )
     } 
