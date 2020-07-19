@@ -15,6 +15,10 @@ export default function Banner({fetchUrl}) {
         fetchData()
     }, [])
     
+    function truncate(str, n){
+        return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+    }
+
     return (
         <header className="banner"
             style={{
@@ -31,8 +35,10 @@ export default function Banner({fetchUrl}) {
                 </div>
 
                 <h1 className="banner__description">
-                    {movie?.overview}
+                    {truncate(movie?.overview, 150)}
                 </h1>
+
+                <div className="banner--fadeBottom" />
             </div>
         </header>
     )
