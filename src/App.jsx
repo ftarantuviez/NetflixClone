@@ -8,24 +8,49 @@ import './App.css'
 
 class App extends React.Component{
 
+    state = {
+        netflixOriginals: [],
+        trending: [],
+        topRated: [],
+        comedyMovies: [],
+        horrorMovies: [],
+        romanceMovies: [],
+        documentaries: [],
+        loading: true
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            netflixOriginals: requests.fetchNetflixOriginals,
+            trending: requests.fetchTrending,
+            topRated: requests.fetchTopRated,
+            comedyMovies: requests.fetchComedyMovies,
+            horrorMovies: requests.fetchHorrorMovies,
+            romanceMovies: requests.fetchRomanceMovies,
+            documentaries: requests.fetchDocumentaries,
+            loading: false
+        })
+    }
+
     render(){
-        return(
+        if(this.state.loading) return 'loading....'
+        else return(
             <div className="app">
                 <NavBar />
                 <Banner 
-                    fetchUrl={requests.fetchNetflixOriginals}
+                    fetchUrl={this.state.netflixOriginals}
                 />
 
                 <Row title="Netflix Originals" 
-                    fetchUrl={requests.fetchNetflixOriginals} 
+                    fetchUrl={this.state.netflixOriginals} 
                     isLargeRow={true}    
                 />
-                <Row title="Trending now" fetchUrl={requests.fetchTrending} />
-                <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-                <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
-                <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
-                <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
-                <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
+                <Row title="Trending now" fetchUrl={this.state.trending} />
+                <Row title="Top Rated" fetchUrl={this.state.topRated} />
+                <Row title="Comedy Movies" fetchUrl={this.state.comedyMovies} />
+                <Row title="Horror Movies" fetchUrl={this.state.horrorMovies} />
+                <Row title="Romance Movies" fetchUrl={this.state.romanceMovies} />
+                <Row title="Documentaries" fetchUrl={this.state.documentaries} />
             </div>
         )
     } 
